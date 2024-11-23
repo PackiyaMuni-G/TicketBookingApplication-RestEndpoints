@@ -2,15 +2,21 @@ package com.movieticketapp.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "theater")
 public class Theater {
 	
 	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 	   public Theater(Long id, String name, String location, int totalSeats, int availableSeats) {
 		super();
@@ -27,7 +33,9 @@ public class Theater {
 	   public Theater() {
 	        // No-arg constructor
 	    }
-	   @OneToMany(mappedBy = "theater") //theater field in Movie is the "owner" of the relationship, and Theater just keeps a list of the movies without directly controlling the relationship
+	   
+	   //without mappedBy separate table
+	   @OneToMany(mappedBy = "theater") //theater field in Movie table is the "owner" of the relationship, and Theater just keeps a list of the movies without directly controlling the relationship
 	    private List<Movie> movies;
 	public Long getId() {
 		return id;

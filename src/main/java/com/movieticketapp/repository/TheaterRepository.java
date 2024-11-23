@@ -14,5 +14,4 @@ public interface TheaterRepository extends JpaRepository<Theater, Long>{
 
 
 
-
 }
